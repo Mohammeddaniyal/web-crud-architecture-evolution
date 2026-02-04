@@ -1,5 +1,5 @@
 <jsp:include page='/MasterPageTopSection.jsp' />
-<script src='/stylethree/js/DesignationEditForm.js'></script>
+<script src='${pageContext.request.contextPath}/js/DesignationEditForm.js'></script>
 <script>
 var code;
 function getModule()
@@ -44,7 +44,7 @@ var okButton=document.createElement('button');
 okButton.innerHTML='Ok';
 okButton.type='button';
 okButton.addEventListener("click",function(){
-window.location.href='/stylethree/Designations.jsp';
+window.location.href='${pageContext.request.contextPath}/Designations.jsp';
 });
 notification.appendChild(h3);
 notification.appendChild(responseDataNode);
@@ -80,7 +80,7 @@ var response=JSON.parse(this.responseText);
 
 if(response.success==false)
 {
-window.location.href="/stylethree/Designations.jsp";
+window.location.href="${pageContext.request.contextPath}/Designations.jsp";
 return;
 }
 title.value=response.result.title;
@@ -112,6 +112,6 @@ Designation
 <td><button type='button' onclick='cancelUpdate()'>Cancel</button></td>
 </table>
 </form>
-<form id='cancelUpdateForm' action='/stylethree/Designations.jsp'></form>
+<form id='cancelUpdateForm' action='${pageContext.request.contextPath}/Designations.jsp'></form>
 </span>
 <jsp:include page='/MasterPageBottomSection.jsp' />

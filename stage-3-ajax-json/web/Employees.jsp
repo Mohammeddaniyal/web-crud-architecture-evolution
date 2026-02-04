@@ -1,6 +1,6 @@
 <jsp:include page='/MasterPageTopSection.jsp' />
-<link rel='stylesheet' type='text/css' href='/stylethree/css/employees.css'>
-<script src='/stylethree/js/Employees.js'></script>
+<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/employees.css'>
+<script src='${pageContext.request.contextPath}/js/Employees.js'></script>
 <script>
 function getModule()
 {
@@ -65,7 +65,7 @@ window.addEventListener('load',populateEmployees);
 <thead>
 <tr>
 <th colspan='6' class='employeeGridHeader'>
-<a href='/stylethree/EmployeeAddForm.jsp'>Add Employee</a>
+<a href='${pageContext.request.contextPath}/EmployeeAddForm.jsp'>Add Employee</a>
 </th>
 </tr>
 <tr>

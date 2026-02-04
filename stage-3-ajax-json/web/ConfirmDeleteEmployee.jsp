@@ -1,6 +1,6 @@
 <jsp:include page='MasterPageTopSection.jsp' />
-<script src='/stylethree/js/ConfirmDeleteEmployee.js'></script>
-<link rel='stylesheet' type='text/css' url='/stylethree/css/employees.css' />
+<script src='${pageContext.request.contextPath}/js/ConfirmDeleteEmployee.js'></script>
+<link rel='stylesheet' type='text/css' url='${pageContext.request.contextPath}/css/employees.css' />
 <script>
 function getModule()
 {
@@ -23,7 +23,7 @@ if(this.status==200)
 var response=JSON.parse(this.responseText);
 if(response.success==false)
 {
-window.location.href='/stylethree/Employees.jsp';
+window.location.href='${pageContext.request.contextPath}/Employees.jsp';
 return;
 }
 
@@ -148,7 +148,7 @@ var okButton=document.createElement('button');
 okButton.innerHTML='Ok';
 okButton.type='button';
 okButton.addEventListener("click",function(){
-window.location.href='/stylethree/Employees.jsp';
+window.location.href='${pageContext.request.contextPath}/Employees.jsp';
 });
 notificationSection.appendChild(h3);
 notificationSection.appendChild(responseDataNode);
@@ -186,6 +186,6 @@ Are you sure you want to delete this employee ?<br>
 </tr>
 </table>
 </form>
-<form id='cancelDeletionForm' action='/stylethree/Employees.jsp'></form>
+<form id='cancelDeletionForm' action='${pageContext.request.contextPath}/Employees.jsp'></form>
 </span>
 <jsp:include page='MasterPageBottomSection.jsp' />

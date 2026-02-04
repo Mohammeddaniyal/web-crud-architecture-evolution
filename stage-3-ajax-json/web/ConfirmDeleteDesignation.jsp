@@ -1,5 +1,5 @@
 <jsp:include page='/MasterPageTopSection.jsp' />
-<script src='/stylethree/js/ConfirmDeleteDesignation.js'></script>
+<script src='${pageContext.request.contextPath}/js/ConfirmDeleteDesignation.js'></script>
 <script>
 function getModule()
 {
@@ -35,7 +35,7 @@ okButton=document.createElement("button");
 okButton.type='button';
 okButton.innerHTML='Ok';
 okButton.addEventListener("click",function(){
-window.location.href='/stylethree/Designations.jsp';
+window.location.href='${pageContext.request.contextPath}/Designations.jsp';
 return;
 });
 deleteDesignation.innerHTML='';
@@ -71,7 +71,7 @@ if(this.status==200)
 var response=JSON.parse(this.responseText);
 if(response.success==false)
 {
-window.location.href="/stylethree/Designations.jsp";
+window.location.href="${pageContext.request.contextPath}/Designations.jsp";
 return;
 }
 designationSection.innerHTML=response.result.title;
@@ -100,6 +100,6 @@ Are you sure you want to delete this designation ?<br>
 <td><button type='button' onclick='deleteDesignation()' >Yes</button></td>
 <td><button type='button' onclick='cancelDeletion()'>No</button></td>
 </table>
-<form id='cancelDeletionForm' action='/stylethree/Designations.jsp'></form>
+<form id='cancelDeletionForm' action='${pageContext.request.contextPath}/Designations.jsp'></form>
 </span>
 <jsp:include page='/MasterPageBottomSection.jsp' />

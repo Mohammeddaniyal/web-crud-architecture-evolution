@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8'>
 <title>HR Application</title>
-<link rel='stylesheet' type='text/css' href='/stylethree/css/styles.css'>
+<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/styles.css'>
 <script>
 function guard()
 {
@@ -20,7 +20,7 @@ document.getElementById('username').innerHTML=splits[1];
 }else
 if(response.success==false)
 {
-window.location.href='/stylethree/LoginForm.jsp';
+window.location.href='${pageContext.request.contextPath}/LoginForm.jsp';
 return;
 }
 }
@@ -39,11 +39,11 @@ var module=getModule();
 var navigationPanel=document.getElementById('navigationPanel');
 
 var designationsLink=document.createElement('a');
-designationsLink.href='/stylethree/Designations.jsp';
+designationsLink.href='${pageContext.request.contextPath}/Designations.jsp';
 designationsLink.textContent='Designations';
 
 var employeesLink=document.createElement('a');
-employeesLink.href='/stylethree/Employees.jsp';
+employeesLink.href='${pageContext.request.contextPath}/Employees.jsp';
 employeesLink.textContent='Employees';
 
 var boldDesignations=document.createElement('b');
@@ -55,7 +55,7 @@ var employeesText=document.createTextNode('Employees');
 boldEmployees.appendChild(employeesText);
 
 var homeLink=document.createElement('a');
-homeLink.href='/stylethree/index.jsp';
+homeLink.href='${pageContext.request.contextPath}/index.jsp';
 homeLink.textContent='Home';
 
 var br1=document.createElement('br');
@@ -90,7 +90,7 @@ if(this.readyState==4)
 {
 if(this.status==200)
 {
-window.location.href='/stylethree/LoginForm.jsp';
+window.location.href='${pageContext.request.contextPath}/LoginForm.jsp';
 }
 else
 {
@@ -111,10 +111,10 @@ guard();
 <div class='main-container'>
 <!-- header starts here -->
 <div class='header'>
-<a href='/stylethree/index.jsp'><img src='/stylethree/images/logo.png' class='logo'></a>
+<a href='${pageContext.request.contextPath}/index.jsp'><img src='${pageContext.request.contextPath}/images/logo.png' class='logo'></a>
 <div class='brand-name'>&nbsp;HR Core</div>
 <div class='username'>
-<img src='/stylethree/images/user.png'/>
+<img src='${pageContext.request.contextPath}/images/user.png'/>
 <span id='username'></span>&nbsp;
 <a href='#' onclick='logout()'>Logout</a>
 </div>

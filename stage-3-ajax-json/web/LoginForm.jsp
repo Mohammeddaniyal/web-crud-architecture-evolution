@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8'>
 <title>HR Application</title>
-<link rel='stylesheet' type='text/css' href='/stylethree/css/styles.css'>
+<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/styles.css'>
 <script>
 function authentication()
 {
@@ -25,7 +25,7 @@ if(this.status==200)
 var response=JSON.parse(this.responseText);
 if(response.success==true)
 {
-window.location.href='/stylethree/index.jsp';
+window.location.href='${pageContext.request.contextPath}/index.jsp';
 return;
 }
 else if(response.success==false)
@@ -49,7 +49,7 @@ xmlHttpRequest.send(JSON.stringify(administrator));
 <div class='main-container'>
 <!-- header starts here -->
 <div class='header'>
-<a href='/stylethree/index.jsp'><img src='/stylethree/images/logo.png' class='logo'></a><div class='brand-name'>&nbspThinking Machines</div>
+<a href='${pageContext.request.contextPath}/index.jsp'><img src='${pageContext.request.contextPath}/images/logo.png' class='logo'></a><div class='brand-name'>&nbspThinking Machines</div>
 </div>
 <!-- header ends here -->
 <!-- content-section starts here -->

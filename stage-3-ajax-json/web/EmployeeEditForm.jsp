@@ -1,6 +1,6 @@
 <jsp:include page='MasterPageTopSection.jsp' />
-<script src='/stylethree/js/EmployeeEditForm.js'></script>
-<link rel='stylesheet' type='text/css' url='/stylethree/css/employees.css' />
+<script src='${pageContext.request.contextPath}/js/EmployeeEditForm.js'></script>
+<link rel='stylesheet' type='text/css' url='${pageContext.request.contextPath}/css/employees.css' />
 <script>
 function getModule()
 {
@@ -24,7 +24,7 @@ var response=JSON.parse(this.responseText);
 
 if(response.success==false)
 {
-window.location.href='/stylethree/Employees.jsp';
+window.location.href='${pageContext.request.contextPath}/Employees.jsp';
 return;
 }
 
@@ -35,7 +35,7 @@ var date=new Date(employee.dateOfBirth);
 
 var year=date.getUTCFullYear();
 var month=String(date.getUTCMonth()+1).padStart(2,'0');
-var day=String(date.getUTCDate()+1).padStart(2,'0');
+var day=String(date.getUTCDate()).padStart(2,'0');
 var dateOfBirth=year+"-"+month+"-"+day;
 employeeEditForm.dateOfBirth.value=dateOfBirth;
 
@@ -105,7 +105,7 @@ var okButton=document.createElement('button');
 okButton.innerHTML='Ok';
 okButton.type='button';
 okButton.addEventListener("click",function(){
-window.location.href='/stylethree/Employees.jsp';
+window.location.href='${pageContext.request.contextPath}/Employees.jsp';
 });
 notificationSection.appendChild(h3);
 notificationSection.appendChild(responseDataNode);
@@ -269,6 +269,6 @@ window.addEventListener('load',populateComboBox);
 </tr>
 </table>
 </form>
-<form id='cancelUpdationForm' action='/stylethree/Employees.jsp'></form>
+<form id='cancelUpdationForm' action='${pageContext.request.contextPath}/Employees.jsp'></form>
 </span>
 <jsp:include page='MasterPageBottomSection.jsp' />

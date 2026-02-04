@@ -44,8 +44,8 @@ placeHolderFor=cellTemplate.getAttribute("placeHolderId");
 if(placeHolderFor==null) continue;
 if(placeHolderFor=='serialNumber') cellTemplate.innerHTML=(sno+1)+'.';
 if(placeHolderFor=='designation') cellTemplate.innerHTML=designations[k].title;
-if(placeHolderFor=='editOption') cellTemplate.innerHTML="<a href='/stylethree/DesignationEditForm.jsp?code="+designations[k].code+"'>Edit</a>"
-if(placeHolderFor=='deleteOption') cellTemplate.innerHTML="<a href='/stylethree/ConfirmDeleteDesignation.jsp?code="+designations[k].code+"'>Delete</a>"
+if(placeHolderFor=='editOption') cellTemplate.innerHTML="<a href='${pageContext.request.contextPath}/DesignationEditForm.jsp?code="+designations[k].code+"'>Edit</a>"
+if(placeHolderFor=='deleteOption') cellTemplate.innerHTML="<a href='${pageContext.request.contextPath}/ConfirmDeleteDesignation.jsp?code="+designations[k].code+"'>Delete</a>"
 }
 }
 
@@ -68,7 +68,7 @@ window.addEventListener('load',populateDesignations);
 <thead>
 <tr>
 <th colspan='4' style='text-align:right;padding:5px'>
-<a href='/stylethree/DesignationAddForm.jsp'>Add new Designation</a>
+<a href='${pageContext.request.contextPath}/DesignationAddForm.jsp'>Add new Designation</a>
 </th>
 </tr>
 <tr>

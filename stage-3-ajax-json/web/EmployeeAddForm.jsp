@@ -1,6 +1,6 @@
 <jsp:include page='MasterPageTopSection.jsp' />
-<script src='/stylethree/js/EmployeeAddForm.js'></script>
-<link rel='stylesheet' type='text/css' url='/stylethree/css/employees.css' />
+<script src='${pageContext.request.contextPath}/js/EmployeeAddForm.js'></script>
+<link rel='stylesheet' type='text/css' url='${pageContext.request.contextPath}/css/employees.css' />
 <script>
 function getModule()
 {
@@ -56,7 +56,7 @@ var noButton=document.createElement('button');
 noButton.innerHTML='No';
 noButton.type='button';
 noButton.addEventListener("click",function(){
-window.location.href='/stylethree/Employees.jsp';
+window.location.href='${pageContext.request.contextPath}/Employees.jsp';
 });
 var table=document.createElement('table');
 var td1=document.createElement('td');
@@ -228,6 +228,6 @@ window.addEventListener('load',populateComboBox);
 </tr>
 </table>
 </form>
-<form id='cancelAdditionForm' action='/stylethree/Employees.jsp'></form>
+<form id='cancelAdditionForm' action='${pageContext.request.contextPath}/Employees.jsp'></form>
 </span>
 <jsp:include page='MasterPageBottomSection.jsp' />

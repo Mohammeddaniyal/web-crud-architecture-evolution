@@ -1,5 +1,5 @@
 <jsp:include page='/MasterPageTopSection.jsp' />
-<script src='/stylethree/js/DesignationAddForm.js'></script>
+<script src='${pageContext.request.contextPath}/js/DesignationAddForm.js'></script>
 <script>
 function getModule()
 {
@@ -40,7 +40,7 @@ var noButton=document.createElement('button');
 noButton.innerHTML='No';
 noButton.type='button';
 noButton.addEventListener("click",function(){
-window.location.href="/stylethree/Designations.jsp";
+window.location.href="${pageContext.request.contextPath}/Designations.jsp";
 return;
 });
 if(response.success==false)
@@ -98,6 +98,6 @@ Designation
 </tr>
 </table>
 </form>
-<form id='cancelAdditionForm' action='/stylethree/Designations.jsp'></form>
+<form id='cancelAdditionForm' action='${pageContext.request.contextPath}/Designations.jsp'></form>
 </span>
 <jsp:include page='/MasterPageBottomSection.jsp' />
