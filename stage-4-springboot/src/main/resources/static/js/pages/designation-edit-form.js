@@ -1,5 +1,12 @@
-window.pages.designationEditForm={
+window.pages['designationEditForm']={
 code: null,
+load: function(params)
+{
+    if(params.id)
+    {
+        this.initEdit(params.id);
+    }
+},
 initEdit: async function(code)
 {
     const title=document.getElementById('title');

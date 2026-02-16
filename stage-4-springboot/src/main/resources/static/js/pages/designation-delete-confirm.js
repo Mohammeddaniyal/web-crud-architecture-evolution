@@ -1,5 +1,12 @@
-window.pages.designationDeleteConfirm={
+window.pages['designationDeleteConfirm']={
 code: null,
+load: function(params)
+{
+    if(params.id)
+    {
+        this.initDelete(params.id);
+    }
+},
 initDelete: async function(code)
 {
     const designationSection=document.getElementById('designationSection');

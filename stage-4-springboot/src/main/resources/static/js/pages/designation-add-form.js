@@ -1,4 +1,4 @@
-window.pages.designationAddForm={
+window.pages['designationAddForm']={
     save: async function()
     {
         const frm=document.getElementById('addDesignationForm');

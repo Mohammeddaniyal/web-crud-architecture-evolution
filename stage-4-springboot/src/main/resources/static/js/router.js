@@ -4,7 +4,7 @@ const mainContent=document.getElementById('main-content');
 const ACTIVE_CLASS='nav-link.active';
 const HIDDEN_CLASS='nav-link-hidden';
 
-async function loadModule(moduleName,code=null)
+async function loadModule(moduleName,params={})
 {
     console.log(`loading module ${moduleName}`);
     if(moduleName==='HOME')
@@ -22,37 +22,19 @@ async function loadModule(moduleName,code=null)
         const html=await response.text();
         mainContent.innerHTML=html;
 
-       if(moduleName==='designations')
-       {
-        if(window.pages && window.pages.designations)
-        {
-            window.pages.designations.load();
-        }
-       }
-       else if(moduleName==='designation-edit-form')
-       {
-        if(window.pages && window.pages.designationEditForm)
-        {
-         if(code!=null)
-          {
-            console.log(`loading designation of this code ${code}`)
-            window.pages.designationEditForm.initEdit(code);
-          }
-        }
-       }
-       else if(moduleName==='designation-delete-confirm')
-       {
-        if(window.pages && window.pages.designationDeleteConfirm)
-        {
-         if(code!=null)
-          {
-            console.log(`loading designation of this code ${code}`)
-            window.pages.designationDeleteConfirm.initDelete(code);
-          }
-        }
-       }
+        const controllerName=kebabToCamel(moduleName);
+        
 
+        const controller=window.pages[controllerName];
 
+        if(controller && typeof controller.load==='function')
+        {
+            console.log(`[Router] Loading controller: ${controllerName}`);
+            controller.load(params);
+        }else
+        {
+            console.warn(`[Router] No controller found for: ${controllerName}`);
+        }
         updateNavigation('designations');
         }else
         {
@@ -67,7 +49,9 @@ async function loadModule(moduleName,code=null)
     }
 
 }
-
+ function kebabToCamel(str) {
+    return str.replace(/-./g, x => x[1].toUpperCase());
+}
 function updateNavigation(activeModule)
 {
 const linkHome=document.getElementById('link-home');
