@@ -23,7 +23,6 @@ window.pages.designationAddForm={
         const title=formData.title.trim();
 
         const designation={
-        'code':0,
         'title':title
         };
         try

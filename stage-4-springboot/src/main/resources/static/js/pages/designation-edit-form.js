@@ -1,6 +1,6 @@
 window.pages.designationEditForm={
 code: null,
-load: async function(code)
+initEdit: async function(code)
 {
     const title=document.getElementById('title');
     this.code=code;
@@ -18,7 +18,7 @@ update: async function()
         const frm=document.getElementById('updateDesignationForm');
         const notification=document.getElementById('notification');
         const errorSection=document.getElementById('errorSection');
-        const designationAddModule=document.getElementById('designationEditModule');
+        const designationEditModule=document.getElementById('designationEditModule');
         notification.innerHTML='';
         errorSection.innerHTML='';
 
