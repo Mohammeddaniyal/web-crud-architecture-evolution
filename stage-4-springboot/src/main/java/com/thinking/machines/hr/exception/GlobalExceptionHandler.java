@@ -13,10 +13,10 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Map<String,String>> handleCustomValidationException(ValidationException exception)
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Map<String,String>> handleBusinessException(BusinessException exception)
     {
-        return new ResponseEntity<>(exception.getErrors(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(422).body(exception.getErrors());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DataConflictException.class)
-    public ResponseEntity<Map<String,String>> handleDataConflictException(DataConflictException exception)
+    public ResponseEntity   <Map<String,String>> handleDataConflictException(DataConflictException exception)
     {
         Map<String,String> errors=new HashMap<>();
         errors.put("message",exception.getMessage());

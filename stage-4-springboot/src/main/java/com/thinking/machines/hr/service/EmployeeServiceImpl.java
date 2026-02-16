@@ -4,7 +4,7 @@ import com.thinking.machines.hr.dto.EmployeeDTO;
 import com.thinking.machines.hr.entity.Designation;
 import com.thinking.machines.hr.entity.Employee;
 import com.thinking.machines.hr.exception.ResourceNotFoundException;
-import com.thinking.machines.hr.exception.ValidationException;
+import com.thinking.machines.hr.exception.BusinessException;
 import com.thinking.machines.hr.repository.DesignationRepository;
 import com.thinking.machines.hr.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         if(!errors.isEmpty())
         {
-            throw new ValidationException(errors);
+            throw new BusinessException(errors);
         }
 
         Employee employee = new Employee();
@@ -122,7 +122,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       }
       if(!errors.isEmpty())
       {
-          throw new ValidationException(errors);
+          throw new BusinessException(errors);
       }
 
       copyDTOtoEntity(employeeDTO,existingEmployee,designation);
