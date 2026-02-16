@@ -24,7 +24,7 @@ public class DesignationServiceImpl implements DesignationService {
     public DesignationDTO add(DesignationDTO designationDTO)
     {
         boolean exists=designationRepository.existsByTitle(designationDTO.getTitle());
-        if(exists) throw new ResourceNotFoundException("Designation "+designationDTO.getTitle()+" already exists");
+        if(exists) throw new DataConflictException("Designation "+designationDTO.getTitle()+" already exists");
         Designation designation=new Designation();
         designation.setTitle(designationDTO.getTitle());
         Designation savedEntity=designationRepository.save(designation);
@@ -53,7 +53,7 @@ public class DesignationServiceImpl implements DesignationService {
 
         if(designationRepository.existsByTitleAndCodeNot(designatioDTO.getTitle(),designatioDTO.getCode()))
         {
-            throw new ResourceNotFoundException("Designation "+designatioDTO.getTitle()+" exists");
+            throw new DataConflictException("Designation "+designatioDTO.getTitle()+" exists");
         }
         existingEntity.setTitle(designatioDTO.getTitle());
         Designation savedEntity=designationRepository.save(existingEntity);
