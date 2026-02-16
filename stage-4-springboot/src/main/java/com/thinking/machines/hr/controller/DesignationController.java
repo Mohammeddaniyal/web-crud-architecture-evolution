@@ -31,10 +31,12 @@ public class DesignationController {
         return new ResponseEntity<>(designationDTOS, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<DesignationDTO> editDesignation(@Valid @RequestBody DesignationDTO dto)
+    @PutMapping("/{code}")
+    public ResponseEntity<DesignationDTO> editDesignation(
+            @PathVariable int code,
+            @Valid @RequestBody DesignationDTO dto)
     {
-        DesignationDTO designationDTO = designationService.update(dto);
+        DesignationDTO designationDTO = designationService.update(code,dto);
         return ResponseEntity.ok(designationDTO);
 
     }
