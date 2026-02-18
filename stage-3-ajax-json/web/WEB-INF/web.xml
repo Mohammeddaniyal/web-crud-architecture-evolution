@@ -23,9 +23,9 @@
   metadata-complete="true">
 
     <description>
-      StyleTwo
+      StyleThree
     </description>
-    <display-name>StyleTwo</display-name>
+    <display-name>StyleThree</display-name>
 
 <servlet>
 <servlet-name>GetDesignations</servlet-name>
