@@ -1,10 +1,10 @@
 package com.thinking.machines.hr.dto;
 
-public class AdministratorDTO {
+public class UserDTO {
     private String username;
     private String role;
 
-    public AdministratorDTO(String username, String role) {
+    public UserDTO(String username, String role) {
         this.username = username;
         this.role = role;
     }

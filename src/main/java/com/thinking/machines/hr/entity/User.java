@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="administrator_secure")
-public class Administrator {
+@Table(name="user")
+public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,7 +59,7 @@ public class Administrator {
     {
         if(this==other) return true;
         if(other==null || !(other instanceof LoginDTO)) return false;
-        Administrator that=(Administrator) other;
+        User that=(User) other;
         return Objects.equals(this.id,that.id);
     }
     @Override
