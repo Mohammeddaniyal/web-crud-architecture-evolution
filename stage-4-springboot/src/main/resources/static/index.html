@@ -18,7 +18,7 @@
         <div class='username'>
             <img src='/images/user.png'/>
             <span id='username-1'></span>&nbsp;
-            <a href='#' onclick='logout()'>Logout</a>
+            <a href='#' onclick='window.logout(); event.preventDefault();'>Logout</a>
         </div>
     </div><!-- header ends here -->
     <!-- content-section starts here -->
@@ -33,7 +33,7 @@
         <!-- left panel ends here -->
         <!-- right panel starts here -->
         <div class='content-right-panel' id="main-content">
-            Welcome <span id='username-2'></span>, User
+
         </div> <!-- right panel ends here -->
     </div>
     <!-- content-section ends here -->

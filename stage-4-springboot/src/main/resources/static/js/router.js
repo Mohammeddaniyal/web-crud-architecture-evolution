@@ -4,11 +4,35 @@ const mainContent=document.getElementById('main-content');
 const ACTIVE_CLASS='nav-link-active';
 const HIDDEN_CLASS='nav-link-hidden';
 
+window.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('/api/auth/me');
+
+        if (response.ok) {
+            const user = await response.json();
+
+            sessionStorage.setItem('userRole', user.role);
+            sessionStorage.setItem('username', user.username);
+
+            // using css trick, to stamp the body with user role
+            document.body.classList.add('role-' + user.role);
+            document.getElementById('username-1').textContent = user.username;
+        } else {
+            console.warn("User not authenticated. Redirecting to login...");
+            window.location.href = '/login';
+            return;
+        }
+        initRouter();
+    } catch (error) {
+        console.error("Failed to fetch user data:", error);
+    }
+});
+
 async function loadModule(moduleName,params={}, push=true)
 {
 if(push)
 {
-    let url='/index.html';
+    let url='/';
     if(moduleName==='employees')
     {
         url='/employees';
@@ -41,7 +65,9 @@ if(push)
 }
     if(moduleName==='HOME')
     {
-        mainContent.innerHTML="<h1>Welcome</h1>"
+        let username=sessionStorage.getItem('username');
+        //alert(user)
+        mainContent.innerHTML=`<h1>Welcome ${username}</h1>`;
         updateNavigation(moduleName);
         return;
     }
@@ -82,6 +108,21 @@ if(push)
  function kebabToCamel(str) {
     return str.replace(/-./g, x => x[1].toUpperCase());
 }
+
+function requireRole(role,defaultState) {
+    const userRole = sessionStorage.getItem('userRole');
+
+    if (userRole !== role) {
+        console.warn("Access Denied.");
+        window.history.replaceState(null, "", `/${defaultState}`);
+        loadModule(`${defaultState}`, {}, false);
+        return false;
+    }
+
+    return true;
+}
+
+
 function updateNavigation(activeModule)
 {
 const linkHome=document.getElementById('link-home');
@@ -122,11 +163,10 @@ window.onpopstate=function(event)
     }
 };
 
-window.addEventListener('DOMContentLoaded',()=>{
-//    alert('DOMContentLoaded');
+function initRouter()
+{
     // look at the address bar
     const currentPath=window.location.pathname;
-    console.log("page loaded, current path is ",currentPath);
 
     if(currentPath==='/employees')
     {
@@ -134,9 +174,11 @@ window.addEventListener('DOMContentLoaded',()=>{
         loadModule('employees',{},false);
     }else if (currentPath === '/employees/add')
     {
+         if (!requireRole('ADMIN','employees')) return;
         loadModule('employee-form', { mode: 'ADD' }, false);
     }else if(currentPath.startsWith('/employees/edit'))
     {
+        if (!requireRole('ADMIN','employees')) return;
         const pathIdInfo=parseEmployeeId(currentPath);
         if(pathIdInfo.isValid)
         {
@@ -150,6 +192,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     }else if(currentPath.startsWith('/employees/delete'))
     {
+             if (!requireRole('ADMIN','employees')) return;
             const pathIdInfo=parseEmployeeId(currentPath);
                 if(pathIdInfo.isValid)
                 {
@@ -167,9 +210,11 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
     else if (currentPath === '/designations/add')
     {
+         if (!requireRole('ADMIN','designations')) return;
         loadModule('designation-form', { mode: 'ADD' }, false);
     }else if(currentPath.startsWith('/designations/edit'))
     {
+             if (!requireRole('ADMIN','designations')) return;
         const pathCodeInfo=parseDesignationCode(currentPath);
         if(pathCodeInfo.isValid)
         {
@@ -183,7 +228,8 @@ window.addEventListener('DOMContentLoaded',()=>{
              loadModule('designations',undefined,false);
         }
     }else if(currentPath.startsWith('/designations/delete')){
-                const pathIdInfo=parseDesignationCode(currentPath);
+             if (!requireRole('ADMIN','designations')) return;
+             const pathIdInfo=parseDesignationCode(currentPath);
                     if(pathIdInfo.isValid)
                     {
                     loadModule('designation-delete-confirm',{id : pathIdInfo.code},false);
@@ -199,7 +245,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         window.history.replaceState(null, "", "/");
         loadModule('HOME', undefined, false);
     }
-});
+}
 
 function parseDesignationCode(currentPath)
 {
@@ -216,3 +262,29 @@ function parseEmployeeId(currentPath)
         const isValid = employeeId && /^[a-zA-Z0-9]+$/.test(employeeId);
         return {isValid,employeeId};
 }
+
+
+// --- Global Logout Function ---
+window.logout = async function() {
+
+    // Spring Boot backend to kill the session
+    try {
+        // Spring Security handles POST requests to /logout by default
+        await fetch('/logout', {
+            method: 'POST'
+        });
+    } catch (error) {
+        console.error("Backend logout failed:", error);
+    }
+
+    // 2. Wipe the Frontend Memory
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('username');
+
+    // 3. Strip the security stamp off the body tag
+    document.body.classList.remove('role-ADMIN', 'role-USER');
+
+    // 4. Redirect the user back to the login screen
+    // Change '/login.html' to whatever your actual login URL is
+    window.location.replace('/login');
+};

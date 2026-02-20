@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>HR Application - Login</title>
+    <link rel='stylesheet' type='text/css' href='/css/styles.css'>
+</head>
+<body>
+<!-- Main container starts here-->
+<div class='main-container'>
+    <!-- header starts here -->
+    <div class='header'>
+        <a href='/index.html'><img src='/images/logo.png' class='logo'></a><div class='brand-name'>&nbspHR Core</div>
+    </div>
+    <!-- header ends here -->
+    <!-- content-section starts here -->
+    <div class='content'>
+        <!-- login form section starts here -->
+        <div class='loginForm'>
+            <form action="/login" method="POST">
+            <table border='0'>
+                <tr>
+                    <td colspan='2' align='center'>
+                        <span id='errorSection' class='error'></span><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td><input type='text' id='username' name='username' maxlength='15'></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type='password' id='password' name='password' maxlength='15'>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2' align='center'>
+                        <button type='submit' >Login</button>
+                    </td>
+                </tr>
+            </table>
+            </form>
+            <script>
+                if (window.location.search.includes('error')) {
+                    document.getElementById('errorSection').innerHTML = 'Invalid username or password.';
+                }
+            </script>
+        </div>
+        <!-- login form section ends here -->
+    </div>
+    <!-- content-section ends here -->
+    <!-- footer starts here -->
+    <div class='footer'>
+        &copy; HR Core 2026
+        <!-- footer ends here -->
+    </div>
+</div>
+<!-- Main container ends here-->
+</body>
+</html>
